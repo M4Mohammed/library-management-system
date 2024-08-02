@@ -13,8 +13,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
-//todo: rename this class to something a lil shorter
-public class BorrowingRecord {
+public class Record {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

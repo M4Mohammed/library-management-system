@@ -14,47 +14,47 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class BorrowingRecordService {
+public class RecordService {
 
-    private final BorrowingRecordRepository borrowingRecordRepository;
+    private final RecordRepository recordRepository;
     private final BookRepository bookRepository;
     private final PatronRepository patronRepository;
 
 
     @Transactional
-    public BorrowingRecord borrowBook(UUID bookId, UUID patronId) {
+    public Record borrowBook(UUID bookId, UUID patronId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new BookNotFoundException(bookId));
 
         Patron patron = patronRepository.findById(patronId)
                 .orElseThrow(() -> new BookNotFoundException(patronId));
 
-        if (borrowingRecordRepository.existsByBookAndReturnDateIsNull(book)) {
+        if (recordRepository.existsByBookAndReturnDateIsNull(book)) {
             throw new IllegalStateException("Book is already borrowed");
         }
 
-        BorrowingRecord borrowingRecord = new BorrowingRecord();
-        borrowingRecord.setBook(book);
-        borrowingRecord.setPatron(patron);
-        borrowingRecord.setBorrowDate(LocalDateTime.now());
+        Record record = new Record();
+        record.setBook(book);
+        record.setPatron(patron);
+        record.setBorrowDate(LocalDateTime.now());
 
-        return borrowingRecordRepository.save(borrowingRecord);
+        return recordRepository.save(record);
     }
 
     @Transactional
-    public BorrowingRecord returnBook(UUID bookId, UUID patronId) {
+    public Record returnBook(UUID bookId, UUID patronId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new BookNotFoundException(bookId));
 
         Patron patron = patronRepository.findById(patronId)
                 .orElseThrow(() -> new BookNotFoundException(patronId));
 
-        BorrowingRecord borrowingRecord = borrowingRecordRepository
+        Record record = recordRepository
                 .findByBookAndReturnDateIsNull(book, patron)
                 .orElseThrow(() -> new IllegalStateException("Book is not borrowed by this patron"));
 
-        borrowingRecord.setReturnDate(LocalDateTime.now());
+        record.setReturnDate(LocalDateTime.now());
 
-        return borrowingRecordRepository.save(borrowingRecord);
+        return recordRepository.save(record);
     }
 }

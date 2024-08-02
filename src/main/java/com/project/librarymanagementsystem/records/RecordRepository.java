@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface BorrowingRecordRepository extends JpaRepository<BorrowingRecord, UUID> {
+public interface RecordRepository extends JpaRepository<Record, UUID> {
     boolean existsByBookAndReturnDateIsNull(Book book);
 
-    Optional<BorrowingRecord> findByBookAndReturnDateIsNull(Book book, Patron patron);
+    Optional<Record> findByBookAndReturnDateIsNull(Book book, Patron patron);
 }

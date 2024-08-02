@@ -10,32 +10,32 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class BorrowingRecordController {
+public class RecordController {
 
-    private final BorrowingRecordService borrowingRecordService;
+    private final RecordService recordService;
 
     //try catch maybe ????
     @PostMapping("/borrow/{bookId}/patron/{patronId}")
-    public ResponseEntity<BorrowingRecord> borrowBook(
+    public ResponseEntity<Record> borrowBook(
             @PathVariable UUID bookId,
             @PathVariable UUID patronId
     ) {
-        BorrowingRecord borrowingRecord = borrowingRecordService.borrowBook(bookId, patronId);
+        Record record = recordService.borrowBook(bookId, patronId);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(borrowingRecord);
+                .body(record);
     }
 
     //try catch maybe ????
     @PutMapping("/return/{bookId}/patron/{patronId}")
-    public ResponseEntity<BorrowingRecord> returnBook(
+    public ResponseEntity<Record> returnBook(
             @PathVariable UUID bookId,
             @PathVariable UUID patronId
     ) {
-        BorrowingRecord borrowingRecord = borrowingRecordService.returnBook(bookId, patronId);
+        Record record = recordService.returnBook(bookId, patronId);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(borrowingRecord);
+                .body(record);
     }
 
 }
