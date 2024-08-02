@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PatronService {
 
-    private final PatronRepo patronRepository;
+    private final PatronRepository patronRepository;
 
 
 }
