@@ -2,6 +2,9 @@ package com.project.librarymanagementsystem.patrons;
 
 import com.project.librarymanagementsystem.records.BorrowingRecord;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -26,16 +29,22 @@ public class Patron {
     private LocalDateTime updatedAt;
 
     @Column(name = "first_name")
+    @NotNull
+    @Size(min = 2, max = 255)
     private String firstName;
 
     @Column(name = "last_name")
+    @NotNull
+    @Size(min = 2, max = 255)
     private String lastName;
 
     @Embedded
     private Address address;
 
+    @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{10}$", message = "Invalid mobile number")
     private String mobile;
 
+    @Pattern(regexp = "^(.+)@(.+)$", message = "Invalid email")
     private String email;
 
     @OneToMany(mappedBy = "patron")

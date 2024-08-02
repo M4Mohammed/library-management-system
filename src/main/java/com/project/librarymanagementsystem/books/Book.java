@@ -2,7 +2,11 @@ package com.project.librarymanagementsystem.books;
 
 import com.project.librarymanagementsystem.records.BorrowingRecord;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.validator.constraints.ISBN;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,8 +26,12 @@ public class Book {
     @Column(name = "date_added", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime dateAdded;
 
+    @NotNull
+    @Size(min = 5, max = 255)
     private String title;
 
+    @NotNull
+    @ISBN(message = "Invalid ISBN")
     private String ISBN;
 
     private String publisher;
@@ -35,6 +43,7 @@ public class Book {
     private String language;
 
     @Column(name = "number_of_pages")
+    @Min(1)
     private int numberOfPages;
 
     @OneToMany(mappedBy = "book")
