@@ -1,5 +1,6 @@
 package com.project.librarymanagementsystem.books;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +31,17 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> addBook(Book book) {
+    public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(bookService.addBook(book));
     }
 
     @PutMapping(path = "{Id}")
-    public ResponseEntity<Book> updateBook(@PathVariable("Id") UUID id, Book book) {
+    public ResponseEntity<Book> updateBook(
+            @PathVariable("Id") UUID id,
+            @RequestBody Book book
+    ) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(bookService.updateBook(id, book));

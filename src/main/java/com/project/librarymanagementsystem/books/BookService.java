@@ -30,6 +30,7 @@ public class BookService {
 
         public Book updateBook(UUID id, Book book) {
             Book existingBook = bookRepository.findById(id).orElseThrow();
+
             existingBook.setTitle(book.getTitle());
             existingBook.setISBN(book.getISBN());
             existingBook.setPublisher(book.getPublisher());
