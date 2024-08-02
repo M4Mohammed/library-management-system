@@ -2,10 +2,7 @@ package com.project.librarymanagementsystem.books;
 
 import com.project.librarymanagementsystem.records.BorrowingRecord;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,7 +11,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class Book {
 

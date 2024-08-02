@@ -2,10 +2,7 @@ package com.project.librarymanagementsystem.patrons;
 
 import com.project.librarymanagementsystem.records.BorrowingRecord;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor(force = true)
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Patron {
 
     @Id
@@ -37,10 +34,8 @@ public class Patron {
     @Embedded
     private Address address;
 
-    @Column(name = "mobile")
     private String mobile;
 
-    @Column(name = "email")
     private String email;
 
     @OneToMany(mappedBy = "patron")

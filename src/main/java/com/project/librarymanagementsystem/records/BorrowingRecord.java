@@ -3,10 +3,7 @@ package com.project.librarymanagementsystem.records;
 import com.project.librarymanagementsystem.books.Book;
 import com.project.librarymanagementsystem.patrons.Patron;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,7 +11,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor(force = true)
 //todo: rename this class to something a lil shorter
 public class BorrowingRecord {
