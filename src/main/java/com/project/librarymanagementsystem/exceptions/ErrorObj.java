@@ -1,4 +1,4 @@
-package com.project.librarymanagementsystem.advice;
+package com.project.librarymanagementsystem.exceptions;
 
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;

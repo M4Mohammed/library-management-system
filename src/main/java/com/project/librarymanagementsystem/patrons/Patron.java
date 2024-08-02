@@ -1,5 +1,6 @@
 package com.project.librarymanagementsystem.patrons;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.librarymanagementsystem.records.BorrowingRecord;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -46,6 +47,9 @@ public class Patron {
 
     @Pattern(regexp = "^(.+)@(.+)$", message = "Invalid email")
     private String email;
+
+    @JsonIgnore
+    private String password;
 
     @OneToMany(mappedBy = "patron")
     private List<BorrowingRecord> borrowingRecords;

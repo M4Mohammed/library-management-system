@@ -1,4 +1,4 @@
-package com.project.librarymanagementsystem.advice.exceptions;
+package com.project.librarymanagementsystem.exceptions;
 
 import java.util.UUID;
 

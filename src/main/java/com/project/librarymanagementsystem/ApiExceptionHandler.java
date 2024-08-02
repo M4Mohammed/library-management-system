@@ -1,7 +1,8 @@
-package com.project.librarymanagementsystem.advice;
+package com.project.librarymanagementsystem;
 
-import com.project.librarymanagementsystem.advice.exceptions.BookNotFoundException;
-import com.project.librarymanagementsystem.advice.exceptions.PatronNotFoundException;
+import com.project.librarymanagementsystem.exceptions.BookNotFoundException;
+import com.project.librarymanagementsystem.exceptions.ErrorObj;
+import com.project.librarymanagementsystem.exceptions.PatronNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

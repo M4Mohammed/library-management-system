@@ -1,6 +1,6 @@
 package com.project.librarymanagementsystem.records;
 
-import com.project.librarymanagementsystem.advice.exceptions.BookNotFoundException;
+import com.project.librarymanagementsystem.exceptions.BookNotFoundException;
 import com.project.librarymanagementsystem.books.Book;
 import com.project.librarymanagementsystem.books.BookRepository;
 import com.project.librarymanagementsystem.patrons.Patron;

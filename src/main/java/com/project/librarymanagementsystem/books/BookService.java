@@ -1,9 +1,7 @@
 package com.project.librarymanagementsystem.books;
 
-import com.project.librarymanagementsystem.advice.exceptions.BookNotFoundException;
+import com.project.librarymanagementsystem.exceptions.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

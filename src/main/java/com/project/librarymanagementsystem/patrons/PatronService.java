@@ -1,7 +1,6 @@
 package com.project.librarymanagementsystem.patrons;
 
-import com.project.librarymanagementsystem.advice.exceptions.BookNotFoundException;
-import com.project.librarymanagementsystem.advice.exceptions.PatronNotFoundException;
+import com.project.librarymanagementsystem.exceptions.PatronNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
