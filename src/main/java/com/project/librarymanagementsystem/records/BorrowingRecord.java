@@ -16,6 +16,7 @@ import java.util.UUID;
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true)
+//todo: rename this class to something a lil shorter
 public class BorrowingRecord {
 
     @Id
@@ -31,7 +32,7 @@ public class BorrowingRecord {
     private Patron patron;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "borrow_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
+    @Column(name = "borrow_date", nullable = false)
     private LocalDateTime borrowDate;
 
     @Temporal(TemporalType.TIMESTAMP)

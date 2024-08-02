@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/books")
+@RequestMapping("/api/books")
 @RequiredArgsConstructor
 public class BookController {
 
