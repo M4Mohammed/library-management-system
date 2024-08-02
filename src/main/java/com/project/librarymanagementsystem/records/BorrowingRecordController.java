@@ -1,14 +1,10 @@
 package com.project.librarymanagementsystem.records;
 
-import com.project.librarymanagementsystem.books.Book;
-import com.project.librarymanagementsystem.patrons.Patron;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
