@@ -31,7 +31,7 @@ public class BorrowingRecord {
     private Patron patron;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "borrow_date", nullable = false)
+    @Column(name = "borrow_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false)
     private LocalDateTime borrowDate;
 
     @Temporal(TemporalType.TIMESTAMP)

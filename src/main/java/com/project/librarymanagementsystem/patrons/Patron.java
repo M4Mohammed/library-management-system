@@ -23,7 +23,7 @@ public class Patron {
     @GeneratedValue(strategy = GenerationType.UUID)
     private final UUID id;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
