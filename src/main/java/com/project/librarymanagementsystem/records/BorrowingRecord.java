@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -30,11 +30,11 @@ public class BorrowingRecord {
     @JoinColumn(name = "patron_id", nullable = false)
     private Patron patron;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "borrow_date", nullable = false)
-    private Date borrowDate;
+    private LocalDateTime borrowDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "return_date")
-    private Date returnDate;
+    private LocalDateTime returnDate;
 }

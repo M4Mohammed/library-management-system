@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,9 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private final UUID id;
+
+    @Column(name = "date_added")
+    private LocalDateTime dateAdded;
 
     private String title;
 
