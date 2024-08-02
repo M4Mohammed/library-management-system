@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/patrons")
+@RequestMapping("api/patrons")
 @RequiredArgsConstructor
 public class PatronController {
 
