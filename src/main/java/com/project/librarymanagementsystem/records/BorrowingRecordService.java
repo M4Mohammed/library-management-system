@@ -1,5 +1,6 @@
 package com.project.librarymanagementsystem.records;
 
+import com.project.librarymanagementsystem.advice.exceptions.BookNotFoundException;
 import com.project.librarymanagementsystem.books.Book;
 import com.project.librarymanagementsystem.books.BookRepository;
 import com.project.librarymanagementsystem.patrons.Patron;
@@ -23,10 +24,10 @@ public class BorrowingRecordService {
     @Transactional
     public BorrowingRecord borrowBook(UUID bookId, UUID patronId) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(/*() -> new ResourceNotFoundException("Book not found")*/);
+                .orElseThrow(() -> new BookNotFoundException(bookId));
 
         Patron patron = patronRepository.findById(patronId)
-                .orElseThrow(/*() -> new ResourceNotFoundException("Patron not found")*/);
+                .orElseThrow(() -> new BookNotFoundException(patronId));
 
         if (borrowingRecordRepository.existsByBookAndReturnDateIsNull(book)) {
             throw new IllegalStateException("Book is already borrowed");
@@ -43,14 +44,14 @@ public class BorrowingRecordService {
     @Transactional
     public BorrowingRecord returnBook(UUID bookId, UUID patronId) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(/*() -> new ResourceNotFoundException("Book not found")*/);
+                .orElseThrow(() -> new BookNotFoundException(bookId));
 
-        Patron patron = patronRepository.findById(bookId)
-                .orElseThrow(/*() -> new ResourceNotFoundException("Patron not found")*/);
+        Patron patron = patronRepository.findById(patronId)
+                .orElseThrow(() -> new BookNotFoundException(patronId));
 
         BorrowingRecord borrowingRecord = borrowingRecordRepository
                 .findByBookAndReturnDateIsNull(book, patron)
-                .orElseThrow(/*() -> new ResourceNotFoundException("Borrowing record not found")*/);
+                .orElseThrow(() -> new IllegalStateException("Book is not borrowed by this patron"));
 
         borrowingRecord.setReturnDate(LocalDateTime.now());
 

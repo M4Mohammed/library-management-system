@@ -1,5 +1,7 @@
 package com.project.librarymanagementsystem.patrons;
 
+import com.project.librarymanagementsystem.advice.exceptions.BookNotFoundException;
+import com.project.librarymanagementsystem.advice.exceptions.PatronNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class PatronService {
     }
 
     public Patron getPatronById(UUID id) {
-        return patronRepository.findById(id).orElse(null);
+        return patronRepository.findById(id).orElseThrow(() -> new PatronNotFoundException(id));
     }
 
     public Patron createPatron(Patron patron) {
@@ -25,13 +27,14 @@ public class PatronService {
     }
 
     public Patron updatePatron(UUID id, Patron patron) {
-        Patron existingPatron = patronRepository.findById(id).orElseThrow();
+        Patron existingPatron = patronRepository.findById(id).orElseThrow(() -> new PatronNotFoundException(id));
 
         existingPatron.setFirstName(patron.getFirstName());
         existingPatron.setLastName(patron.getLastName());
         existingPatron.setAddress(patron.getAddress());
         existingPatron.setMobile(patron.getMobile());
         existingPatron.setEmail(patron.getEmail());
+
         return patronRepository.save(existingPatron);
     }
 

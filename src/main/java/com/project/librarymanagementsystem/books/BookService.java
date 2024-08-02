@@ -1,5 +1,6 @@
 package com.project.librarymanagementsystem.books;
 
+import com.project.librarymanagementsystem.advice.exceptions.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,8 @@ public class BookService {
             return bookRepository.findAll();
         }
 
-        //todo: adviccccccccccccccccce
         public Book getBookById(UUID id) {
-            return bookRepository.findById(id).orElseThrow();
+            return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
         }
 
         public Book addBook(Book book) {
@@ -29,7 +29,7 @@ public class BookService {
         }
 
         public Book updateBook(UUID id, Book book) {
-            Book existingBook = bookRepository.findById(id).orElseThrow();
+            Book existingBook = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
 
             existingBook.setTitle(book.getTitle());
             existingBook.setISBN(book.getISBN());
@@ -38,6 +38,7 @@ public class BookService {
             existingBook.setGenre(book.getGenre());
             existingBook.setLanguage(book.getLanguage());
             existingBook.setNumberOfPages(book.getNumberOfPages());
+
             return bookRepository.save(existingBook);
         }
 
