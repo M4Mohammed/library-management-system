@@ -22,7 +22,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.UUID)
     private final UUID id;
 
-    @Column(name = "date_added")
+    @Column(name = "date_added", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime dateAdded;
 
     private String title;
