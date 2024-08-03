@@ -1,7 +1,7 @@
 package com.project.librarymanagementsystem.patrons;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.librarymanagementsystem.records.BorrowingRecord;
+import com.project.librarymanagementsystem.records.Record;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -52,7 +52,7 @@ public class Patron {
     private String password;
 
     @OneToMany(mappedBy = "patron")
-    private List<BorrowingRecord> borrowingRecords;
+    private List<Record> records;
 
 
 }

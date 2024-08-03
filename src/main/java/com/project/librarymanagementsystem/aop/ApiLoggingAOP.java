@@ -19,6 +19,18 @@ import java.util.Enumeration;
 @Aspect
 @Component
 public class ApiLoggingAOP {
+
+    private String getHeadersAsString(HttpServletRequest request) {
+        StringBuilder headers = new StringBuilder();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            headers.append(headerName).append(": ").append(request.getHeader(headerName)).append(", ");
+        }
+        return headers.toString();
+
+    }
+
     @Before("within(com.project.librarymanagementsystem..*Controller)")
     public void requestLog(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -34,17 +46,6 @@ public class ApiLoggingAOP {
         log.debug("Calling method: {}.{}",
                 joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName());
-    }
-
-    private String getHeadersAsString(HttpServletRequest request) {
-        StringBuilder headers = new StringBuilder();
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String headerName = headerNames.nextElement();
-            headers.append(headerName).append(": ").append(request.getHeader(headerName)).append(", ");
-        }
-        return headers.toString();
-
     }
 
     @AfterReturning(pointcut = "within(com.project.librarymanagementsystem..*Controller)", returning = "result")

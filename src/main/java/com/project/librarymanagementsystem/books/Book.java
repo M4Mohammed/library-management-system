@@ -1,6 +1,6 @@
 package com.project.librarymanagementsystem.books;
 
-import com.project.librarymanagementsystem.records.BorrowingRecord;
+import com.project.librarymanagementsystem.records.Record;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -47,5 +47,5 @@ public class Book {
     private int numberOfPages;
 
     @OneToMany(mappedBy = "book")
-    private List<BorrowingRecord> borrowingRecords;
+    private List<Record> records;
 }
