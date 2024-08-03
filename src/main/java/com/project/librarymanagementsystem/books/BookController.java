@@ -30,6 +30,13 @@ public class BookController {
                 .body(bookService.getBookById(id));
     }
 
+    @GetMapping(path = "{Id}/availability")
+    public ResponseEntity<Boolean> checkBookAvailability(@PathVariable("Id") UUID id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(bookService.checkBookAvailability(id));
+    }
+
     @PostMapping
     public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
         return ResponseEntity

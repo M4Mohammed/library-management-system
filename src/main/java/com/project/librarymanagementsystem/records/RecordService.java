@@ -6,6 +6,7 @@ import com.project.librarymanagementsystem.books.BookRepository;
 import com.project.librarymanagementsystem.patrons.Patron;
 import com.project.librarymanagementsystem.patrons.PatronRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,12 +34,12 @@ public class RecordService {
             throw new IllegalStateException("Book is already borrowed");
         }
 
-        Record record = new Record();
-        record.setBook(book);
-        record.setPatron(patron);
-        record.setBorrowDate(LocalDateTime.now());
+        Record borrowRecord = new Record();
+        borrowRecord.setBook(book);
+        borrowRecord.setPatron(patron);
+        borrowRecord.setBorrowDate(LocalDateTime.now());
 
-        return recordRepository.save(record);
+        return recordRepository.save(borrowRecord);
     }
 
     @Transactional
@@ -49,12 +50,12 @@ public class RecordService {
         Patron patron = patronRepository.findById(patronId)
                 .orElseThrow(() -> new BookNotFoundException(patronId));
 
-        Record record = recordRepository
+        Record returnRecord = recordRepository
                 .findByBookAndReturnDateIsNull(book, patron)
                 .orElseThrow(() -> new IllegalStateException("Book is not borrowed by this patron"));
 
-        record.setReturnDate(LocalDateTime.now());
+        returnRecord.setReturnDate(LocalDateTime.now());
 
-        return recordRepository.save(record);
+        return recordRepository.save(returnRecord);
     }
 }

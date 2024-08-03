@@ -46,6 +46,10 @@ public class Book {
     @Min(1)
     private int numberOfPages;
 
+    @NotNull
+    @Column(name = "is_available", columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean isAvailable;
+
     @OneToMany(mappedBy = "book")
     private List<Record> records;
 }
