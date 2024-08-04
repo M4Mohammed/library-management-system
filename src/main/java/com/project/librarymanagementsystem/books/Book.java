@@ -15,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class Book {
@@ -23,20 +24,18 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.UUID)
     private final UUID id;
 
-    @Column(name = "date_added", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dateAdded;
 
     @NotNull
     @Size(min = 5, max = 255)
     private String title;
+
+    private String author;
 
     @NotNull
     @ISBN(message = "Invalid ISBN")
     private String ISBN;
 
     private String publisher;
-
-    private String author;
 
     private String genre;
 
@@ -49,6 +48,9 @@ public class Book {
     @NotNull
     @Column(name = "is_available", columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean isAvailable;
+
+    @Column(name = "date_added", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime dateAdded;
 
     @OneToMany(mappedBy = "book")
     private List<Record> records;

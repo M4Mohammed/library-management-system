@@ -24,7 +24,7 @@ public class PatronService {
     }
 
     @Cacheable(value = "patronCache", key = "#patron.id")
-    public Patron createPatron(Patron patron) {
+    public Patron addPatron(Patron patron) {
         return patronRepository.save(patron);
     }
 

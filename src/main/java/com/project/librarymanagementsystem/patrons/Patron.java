@@ -15,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 public class Patron {

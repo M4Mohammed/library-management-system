@@ -34,7 +34,7 @@ public class PatronController {
     public ResponseEntity<Patron> createPatron(@Valid @RequestBody Patron patron) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(patronService.createPatron(patron));
+                .body(patronService.addPatron(patron));
     }
 
     @PutMapping("{id}")

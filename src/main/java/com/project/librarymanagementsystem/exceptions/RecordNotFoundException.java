@@ -3,9 +3,9 @@ package com.project.librarymanagementsystem.exceptions;
 
 import java.util.UUID;
 
-public class BorrowNotFoundException extends RuntimeException {
+public class RecordNotFoundException extends RuntimeException {
 
-    public BorrowNotFoundException(UUID id) {
+    public RecordNotFoundException(UUID id) {
         super("Borrow not found with id: " + id);
     }
 }

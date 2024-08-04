@@ -11,19 +11,21 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class Record {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private final UUID id;
+    @EmbeddedId
+    private final RecordId id;
 
     @ManyToOne
+    @MapsId("bookId")
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
     @ManyToOne
+    @MapsId("patronId")
     @JoinColumn(name = "patron_id", nullable = false)
     private Patron patron;
 
