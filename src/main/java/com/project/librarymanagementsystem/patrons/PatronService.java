@@ -1,6 +1,9 @@
 package com.project.librarymanagementsystem.patrons;
 
 import com.project.librarymanagementsystem.exceptions.PatronNotFoundException;
+import com.project.librarymanagementsystem.patrons.dto.PatronCreateDto;
+import com.project.librarymanagementsystem.patrons.dto.PatronResponseDto;
+import com.project.librarymanagementsystem.patrons.dto.PatronUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -13,32 +16,36 @@ import java.util.UUID;
 public class PatronService {
 
     private final PatronRepository patronRepository;
+    private final PatronMapper patronMapper;
 
-    public List<Patron> getAllPatrons() {
-        return patronRepository.findAll();
+    public List<PatronResponseDto> getAllPatrons() {
+        return patronRepository.findAll()
+                .stream()
+                .parallel()
+                .map(patronMapper::toResponseDto)
+                .toList();
     }
 
     @Cacheable(value = "patronCache", key = "#id")
-    public Patron getPatronById(UUID id) {
-        return patronRepository.findById(id).orElseThrow(() -> new PatronNotFoundException(id));
+    public PatronResponseDto getPatronById(UUID id) {
+        return patronRepository.findById(id)
+                .map(patronMapper::toResponseDto)
+                .orElseThrow(() -> new PatronNotFoundException(id));
     }
 
     @Cacheable(value = "patronCache", key = "#patron.id")
-    public Patron addPatron(Patron patron) {
-        return patronRepository.save(patron);
+    public PatronResponseDto addPatron(PatronCreateDto createDto) {
+        return patronMapper.toResponseDto(patronRepository.save(patronMapper.toEntity(createDto)));
     }
 
     @Cacheable(value = "patronCache", key = "#id")
-    public Patron updatePatron(UUID id, Patron patron) {
-        Patron existingPatron = patronRepository.findById(id).orElseThrow(() -> new PatronNotFoundException(id));
-
-        existingPatron.setFirstName(patron.getFirstName());
-        existingPatron.setLastName(patron.getLastName());
-        existingPatron.setAddress(patron.getAddress());
-        existingPatron.setMobile(patron.getMobile());
-        existingPatron.setEmail(patron.getEmail());
-
-        return patronRepository.save(existingPatron);
+    public PatronResponseDto updatePatron(UUID id, PatronUpdateDto updateDto) {
+        return patronRepository.findById(id)
+                .map(patron -> {
+                    patronMapper.updateEntity(updateDto, patron);
+                    return patronMapper.toResponseDto(patronRepository.save(patron));
+                })
+                .orElseThrow(() -> new PatronNotFoundException(id));
     }
 
     public void deletePatron(UUID id) {

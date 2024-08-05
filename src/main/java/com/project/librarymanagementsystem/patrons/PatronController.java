@@ -1,5 +1,8 @@
 package com.project.librarymanagementsystem.patrons;
 
+import com.project.librarymanagementsystem.patrons.dto.PatronCreateDto;
+import com.project.librarymanagementsystem.patrons.dto.PatronResponseDto;
+import com.project.librarymanagementsystem.patrons.dto.PatronUpdateDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,30 +20,30 @@ public class PatronController {
     private final PatronService patronService;
 
     @GetMapping
-    public ResponseEntity<List<Patron>> getAllPatrons() {
+    public ResponseEntity<List<PatronResponseDto>> getAllPatrons() {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(patronService.getAllPatrons());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Patron> getPatronById(@PathVariable UUID id) {
+    public ResponseEntity<PatronResponseDto> getPatronById(@PathVariable UUID id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(patronService.getPatronById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Patron> createPatron(@Valid @RequestBody Patron patron) {
+    public ResponseEntity<PatronResponseDto> createPatron(@Valid @RequestBody PatronCreateDto patron) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(patronService.addPatron(patron));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Patron> updatePatron(
+    public ResponseEntity<PatronResponseDto> updatePatron(
             @PathVariable UUID id,
-            @RequestBody Patron patron
+            @RequestBody PatronUpdateDto patron
     ) {
         return ResponseEntity
                 .status(HttpStatus.OK)
