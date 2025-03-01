@@ -1,17 +1,22 @@
 spring:
   application:
     name: LibraryManagementSystem
+  profiles:
+    active: postgres-only
 
+---
+spring:
+  config:
+    activate:
+      on-profile: full
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
-
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -21,6 +26,20 @@ spring:
       host: localhost
       port: 6379
 
-jwt:
-  secret: superlongandsecuresecrtkey
-  expiration: 900000
+---
+spring:
+  config:
+    activate:
+      on-profile: postgres-only
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
